@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <app-header v-bind:data="num"></app-header>
+        <app-content v-on:pass="deliverNum"></app-content>
+        <add-button v-on:add="addNum"></add-button>
+        <clear-button v-on:clear="clearNum"></clear-button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var appHeader = {
+            template: '<div>header {{data}}</div>',
+            props:['data']
+        }
+        var appContent ={
+            template:'<button v-on:click="passNum">100 pass</button>',
+            methods: {
+                passNum: function(){
+                    this.$emit('pass',100);
+                }
+            }
+        }
+        var addButton ={
+            template:'<button v-on:click="addNum">add</button>',
+            methods:{
+                addNum: function(){
+                    this.$emit('add')
+                }
+            }
+        }
+        var clearButton ={
+            template: '<button v-on:click="clearNum">Clear</button>',
+            methods:{
+                clearNum:function(){
+                    this.$emit('clear')
+                }
+            }
+        }
+
+        new Vue({ 
+            el: '#app',
+            components: {
+                'app-header': appHeader,
+                'app-content': appContent,
+                'add-button': addButton,
+                'clear-button': clearButton
+            },
+            data: {
+                num : 0
+            },
+            methods: {
+                deliverNum: function(value){
+                    this.num += value;
+                },
+                addNum: function(){
+                    this.num ++;
+                },
+                clearNum: function(){
+                    this.num = 0;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
