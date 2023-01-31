@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <app-header v-bind:propsdata="message"></app-header>
+        <app-content v-bind:propsdata="num"></app-content>
+        <app-button v-on:pass="logText"> </app-button>
+        <add-button v-on:add="addNumber"></add-button>
+        <clear-button v-on:clear="clearNumber"></clear-button>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> 
+    <script>
+        var appHeader = {
+            template: '<h1>{{propsdata}}</h1>',
+            props: ['propsdata']
+        }
+
+        var appContent = {
+            template:'<div>{{propsdata}}</div>',
+            props: ['propsdata']
+        }
+        
+        var appButton = {
+            template:'<button v-on:click="passEvent">Click me</button>',
+            methods:{
+                passEvent:function() {
+                    this.$emit('pass');
+                }
+            }
+        }
+        var addButton = {
+            template:'<button v-on:click="addNumber">Add</button>',
+            methods:{
+                addNumber:function(){
+                    this.$emit('add')
+                }
+            }
+        }
+        var clearButton = {
+            template:'<button v-on:click="clearNumber">Clear</button>',
+            methods:{
+                clearNumber:function(){
+                    this.$emit('clear')
+                }
+            }
+        }
+        new Vue({
+            el: '#app',
+            components:{
+                'app-header': appHeader,
+                'app-content': appContent,
+                'app-button': appButton,
+                'add-button': addButton,
+                'clear-button': clearButton
+            },
+            data: {
+                message: 'hi',
+                num: 10
+            },
+            methods: {
+                logText: function(){
+                    this.message = this.message+ this.num;
+                    console.log('hi');
+                },
+                addNumber: function(){
+                    this.num++;
+                    console.log('hihi');
+                },
+                clearNumber:function(){
+                    this.message = 'hi';
+                    this.num = 10;
+                    console.log("clear");
+                }
+            },
+        
+        })
+
+    </script>
+</body>
+</html>

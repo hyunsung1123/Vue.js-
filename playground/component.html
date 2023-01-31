@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <app-header></app-header>
+        <navigationBar></navigationBar>
+        <app-content></app-content>
+        <app-footer></app-footer>
+    </div>
+    <div id="app1">
+        <app-header> </app-header>
+        <text2></text2>
+        <text1></text1>
+        <app-footer></app-footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>  
+        Vue.component('app-footer',{
+            template: '<footer>footer</footer>'
+        });
+        new Vue({
+            el: '#app',
+            components: {
+                'app-header': {
+                    template: '<h1>Header</h1>',
+                    components:{
+                        'navigationBar':{
+                            template:'<h2>navigation<h2>'
+                        }
+                    }
+                },
+                'app-content':{
+                    template: '<div>content</div>'
+                }
+            }
+        },
+         );
+        new Vue({
+            el: '#app1',
+            components : {
+                'text1': {
+                    template: '<button id="button1" onclick=a()>yes</button>'
+                },
+                'text2': {
+                    template: '<h1 id="hello">HELLO</h1>'
+                }
+            }
+        })
+        a = document.getElementById('hello')
+        function a() {
+            a.innerText = "Aaaaaa"
+        }
+    </script>
+</body>
+</html>
