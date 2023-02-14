@@ -4,8 +4,8 @@
     <hr>
     <h2> 곱한 값을 구해보세요! </h2>
     <hr>
-    <h3>숫자1 : {{propsnum1}}</h3>
-    <h3>숫자2 : {{propsnum2}}</h3>
+    <h3>숫자1 : {{num1}}</h3>
+    <h3>숫자2 : {{num2}}</h3>
     
     <form v-on:submit.prevent="SubmitForm">
         <input type="number" v-model="input" ref="answer">
