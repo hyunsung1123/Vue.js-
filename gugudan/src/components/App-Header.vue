@@ -19,23 +19,33 @@
 
 <script>
 export default {
-    props: ['propsnum1','propsnum2','propsnum3','count','wrongcount'],
     data(){
         return{
+            num1:Math.ceil(Math.random()*10),
+            num2:Math.ceil(Math.random()*10),
+            count:0,
+            wrongcount:0,
             result_html:'',
             input : ''
         }
     },
+    computed : {
+    result : function(){
+      return this.num1 * this.num2
+        }
+    },
     methods:{
         SubmitForm:function(){
-            if(this.propsnum3 == this.input){
-                this.$emit("correct");
+            if(this.result == this.input){
+                this.num1 = Math.ceil(Math.random()*10)
+                this.num2 = Math.ceil(Math.random()*10)
+                this.count ++; 
                 this.result_html="정답";
                 this.input='';
                 this.$refs.answer.focus()
             }
             else{
-                this.$emit("wrong");
+                this.wrongcount ++;
                 this.input='';
                 this.result_html="오답";
             }
